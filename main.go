@@ -27,6 +27,7 @@ func DownloadSeries(e int, episode _struct.Episodes, seasonFlag int, itemId int)
 	dir := strconv.Itoa(itemId) + "/"
 	os.MkdirAll(dir, os.ModePerm)
 	dirFull := dir + fileName + ".mp4"
+	fmt.Printf("\rStarting download %s\r", fileName)
 	err := DownloadFile(dirFull, urlFile, fileName)
 	if err != nil {
 		panic(err)
@@ -59,7 +60,7 @@ func main() {
 	ApiKey := flag.String("key", "foo", "Api Key")
 	IdItem := flag.Int("item", 0, "id item")
 	seasonFlag := flag.Int("s", 0, "id season")
-	episodeFlag := flag.Int("e", 0, "id episode")
+	episodeFlag := flag.Int("e", -1, "id episode")
 	flag.Parse()
 	fmt.Println("key: ", *ApiKey, " item: ", *IdItem, " s:", *seasonFlag, " e:", *episodeFlag)
 	var api = api.Api{ApiKey: *ApiKey}
